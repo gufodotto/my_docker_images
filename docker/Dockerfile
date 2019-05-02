@@ -7,4 +7,16 @@ LABEL org.label-schema.schema-version="1.0" \
     org.label-schema.license="GPLv2" \
     org.label-schema.build-date="20190305"
 
+RUN yum -y update \
+    && yum -y install curl bzip2 which \
+    && curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
+    && bash /tmp/miniconda.sh -bfp /usr/local/ \
+    && rm -rf /tmp/miniconda.sh \
+    && conda install -y python=3 \
+    && conda update conda \
+    && conda clean --all --yes \
+    && rpm -e --nodeps curl bzip2 \
+    && yum clean all
+
 CMD ["/bin/bash"]
+
