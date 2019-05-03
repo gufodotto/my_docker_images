@@ -20,4 +20,5 @@ RUN yum -y update \
     && rpm -e --nodeps curl bzip2 \
     && yum clean all
 
+
 CMD ["/bin/bash"]
